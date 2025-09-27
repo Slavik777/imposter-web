@@ -8,7 +8,54 @@ const WORDS = [
   'Chocolate','Bread','Home','Balcony','Road','Music','Book','River','Mountain','Snow',
   'Forest','Beach','Lamp','Pencil','Umbrella','Flower','Station','Plane','Train','Car',
   'Apple','Pear','Strawberry','Banana','Orange','Lemon','Honey','Cheese','Egg','Cake',
-]
+
+  'Ball','Backpack','Battery','Bridge','Bottle','Broom','Brush','Bus','BusStop','Cabin',
+  'Calendar','Camera','Candle','Candy','Canyon','Castle','Cave','Cereal','Chalk','Champagne',
+  'Church','Cinema','Clock','Cloud','Coat','Coin','Compass','Cookie','Court','Cow',
+  'Crayon','Crow','Cup','Curtain','Desk','Desert','Diamond','Domino','Door','Dragon',
+  'Drawer','Drum','Duck','Eagle','Engine','Envelope','Factory','Farm','Feather','Fence',
+  'Festival','Fire','Fireplace','Firework','Fish','Flag','Flute','Fog','Football','Fork',
+  'Fountain','Garage','Garden','Gem','Ghost','Glass','Glasses','Globe','Glue','Goat',
+  'Gold','Grapes','Grass','Hamburger','Hammer','Hat','Helmet','Hill','Hospital','Hotel',
+  'House','Ice','IceCream','Igloo','Island','Jacket','Jar','Jelly','Jungle','Kettle',
+  'Keyboard','Kite','Knife','Ladder','Lake','Leaf','Library','Lighthouse','Lion','Lizard',
+  'Mail','Map','Market','Mask','Match','Meadow','Microscope','Milk','Mirror','Moon',
+  'Motorcycle','Museum','Mushroom','Nail','Necklace','Needle','Newspaper','Notebook','Oasis','Ocean',
+  'Octopus','Office','Onion','Opera','Oven','Owl','Paint','Palette','Pancake','Panda',
+  'Paper','Parrot','Passport','Peach','Peanut','Pearl','Pen','Penguin','Pepper','Piano',
+  'Pickaxe','Picture','Pig','Pillow','Pineapple','Pipe','PizzaBox','Planet','Plank','Plate',
+  'Playground','Pocket','Police','Pond','Popcorn','Postcard','Potato','Printer','Pumpkin','Pyramid',
+  'Queen','Quill','Rabbit','Rainbow','Raindrop','Razor','Refrigerator','Ring','Robot','Rock',
+  'Rocket','Roof','Rope','Rose','Sail','Sand','Sandwich','Saxophone','Scarf','School',
+  'Scissors','Scooter','Screen','Seashell','Server','Shark','Sheep','Shelf','Shipwreck','Shoes',
+  'Shovel','Shrimp','Skateboard','Ski','Skull','Sky','Slipper','Smartphone','Snail','Snake',
+  'Soap','Sofa','Space','Spoon','Spring','Square','Squirrel','Stadium','Star','Statue',
+  'Steak','Stone','Store','Storm','Subway','Suit','Suitcase','Sunflower','Sushi','Swamp',
+  'Sweater','Sword','Taxi','TeaPot','Temple','Tent','Thermometer','Thunder','Ticket','Tiger',
+  'Toast','Toilet','Tomato','Toothbrush','Torch','Tower','Toy','TrafficLight','TrainStation','Trash',
+  'Tree','Triangle','Trampoline','Trophy','Truck','Turtle','Typewriter','UmbrellaStand','Unicorn','Uniform',
+  'Valley','Vase','Vegetables','Violin','Volcano','Wallet','Warehouse','Watch','Waterfall','Whale',
+  'Wheel','Windmill','Window','Wine','Wolf','Wood','Wool','Wrench','Xylophone','Yacht',
+  'Yogurt','Zebra','Zoo',
+
+  // people & roles
+  'Artist','Astronaut','Baker','Barber','Builder','Captain','Chef','Clown','Detective','Diver',
+  'Driver','Farmer','Firefighter','Fisherman','Judge','King','Knight','Magician','Mechanic','Nurse',
+  'Painter','Pilot','Plumber','PoliceOfficer','Programmer','Queen','Scientist','Singer','Soldier','Teacher',
+
+  // places & activities
+  'Airport','Aquarium','Bakery','Bank','Bar','Barbecue','Bedroom','Cemetery','Concert','Farmhouse',
+  'FestivalStage','Gym','Harbor','Highway','Kindergarten','Kitchen','Laboratory','Laundry','LibraryHall','MarketSquare',
+  'Mountaintop','OfficeDesk','Playroom','Port','Restaurant','RoofTop','SchoolYard','Suburb','Supermarket','SwimmingPool',
+  'Theater','Village','WarehouseDock','Workshop',
+
+  // extra foods
+  'Bagel','Biscuit','Brownie','Burger','Cabbage','Carrot','Chili','Corn','Croissant','Cucumber',
+  'Doughnut','Gingerbread','Gnocchi','Hotdog','Lasagna','Macaroni','Mango','Muffin','Noodles','Oatmeal',
+  'Olive','Pasta','Pie','Pretzel','Raspberry','Salad','Salmon','Sausage','Spaghetti','Stew',
+  'Strudel','SushiRoll','Taco','Tangerine','Waffle'
+];
+
 
 function Button({
   label, onClick, disabled, variant = 'primary', title,
