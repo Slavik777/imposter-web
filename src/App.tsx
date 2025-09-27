@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 
 type Stage = 'setup' | 'reveal' | 'play' | 'results'
 
@@ -11,9 +11,13 @@ const WORDS = [
 ]
 
 function Button({
-  label, onClick, disabled, variant = 'primary', title
+  label, onClick, disabled, variant = 'primary', title,
 }: {
-  label: string; onClick?: () => void; disabled?: boolean; variant?: 'primary'|'secondary'|'ghost'; title?: string
+  label: string
+  onClick?: () => void
+  disabled?: boolean
+  variant?: 'primary' | 'secondary' | 'ghost'
+  title?: string
 }) {
   return (
     <button
@@ -27,7 +31,7 @@ function Button({
   )
 }
 
-const Chip = ({ text }: { text: string }) => (<span className="chip">{text}</span>)
+const Chip = ({ text }: { text: string }) => <span className="chip">{text}</span>
 
 export default function App() {
   const [stage, setStage] = useState<Stage>('setup')
@@ -45,7 +49,6 @@ export default function App() {
   const [secretWord, setSecretWord] = useState('')
   const [imposterIndex, setImposterIndex] = useState<number | null>(null)
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [revealed, setRevealed] = useState<boolean[]>([])
 
   const minPlayers = 3
   const canStart = players.length >= minPlayers && (useRandomWord || customWord.trim().length > 0)
@@ -53,40 +56,56 @@ export default function App() {
   function addPlayer() {
     const trimmed = nameInput.trim()
     if (!trimmed) return
-    if (players.includes(trimmed)) { alert("This name is already in the list."); return }
+    if (players.includes(trimmed)) {
+      // eslint-disable-next-line no-alert
+      alert('This name is already in the list.')
+      return
+    }
     setPlayers(p => [...p, trimmed])
     setNameInput('')
   }
-  function removePlayer(name: string) { setPlayers(p => p.filter(n => n !== name)) }
+
+  function removePlayer(name: string) {
+    setPlayers(p => p.filter(n => n !== name))
+  }
 
   function startGame() {
     if (!canStart) return
     const chosenWord = useRandomWord ? word : customWord.trim()
-    if (!chosenWord) { alert("Provide a word or enable Random."); return }
+    if (!chosenWord) {
+      // eslint-disable-next-line no-alert
+      alert('Provide a word or enable Random.')
+      return
+    }
     const impIndex = Math.floor(Math.random() * players.length)
     setImposterIndex(impIndex)
     setSecretWord(chosenWord)
-    setRevealed(Array(players.length).fill(false))
     setCurrentIndex(0)
     setIsCardShown(false)
     setStage('reveal')
   }
 
   function markRevealedAndNext() {
-    setRevealed(arr => { const copy = [...arr]; copy[currentIndex] = true; return copy })
     setIsCardShown(false)
     if (currentIndex + 1 < players.length) setCurrentIndex(i => i + 1)
     else setStage('play')
   }
 
   function resetToSetup() {
-    setStage('setup'); setSecretWord(''); setImposterIndex(null); setCurrentIndex(0); setRevealed([]); setIsCardShown(false)
+    setStage('setup')
+    setSecretWord('')
+    setImposterIndex(null)
+    setCurrentIndex(0)
+    setIsCardShown(false)
+    setCustomWord('')
+    setUseRandomWord(true)
   }
 
   return (
     <div className="page">
       <header>
-        <h1 className="center">IMPOSTER: GUESS WHO'S THE LIAR</h1>
+        <h1>IMPOSTER</h1>
+        <p className="muted">Pass-and-play party game (one device)</p>
       </header>
 
       {stage === 'setup' && (
@@ -98,10 +117,11 @@ export default function App() {
                 value={nameInput}
                 onChange={e => setNameInput(e.target.value)}
                 placeholder="Player name"
-                onKeyDown={(e) => { if (e.key === 'Enter') addPlayer() }}
+                onKeyDown={e => { if (e.key === 'Enter') addPlayer() }}
               />
               <Button label="Add" onClick={addPlayer} disabled={!nameInput.trim()} />
             </div>
+
             {players.length === 0 ? (
               <p className="muted">Add at least {minPlayers} players.</p>
             ) : (
@@ -120,9 +140,20 @@ export default function App() {
           <section>
             <h2>Secret Word</h2>
             <div className="row">
-              <button className={`toggle ${useRandomWord ? 'active' : ''}`} onClick={() => setUseRandomWord(true)}>Random</button>
-              <button className={`toggle ${!useRandomWord ? 'active' : ''}`} onClick={() => setUseRandomWord(false)}>Custom</button>
+              <button
+                className={`toggle ${useRandomWord ? 'active' : ''}`}
+                onClick={() => setUseRandomWord(true)}
+              >
+                Random
+              </button>
+              <button
+                className={`toggle ${!useRandomWord ? 'active' : ''}`}
+                onClick={() => setUseRandomWord(false)}
+              >
+                Custom
+              </button>
             </div>
+
             {useRandomWord ? (
               <p className="muted">Tip: the word refreshes when you restart setup.</p>
             ) : (
@@ -144,14 +175,16 @@ export default function App() {
         <div className="center">
           <p className="muted">Reveal step: {currentIndex + 1} / {players.length}</p>
           <h2>Player: <strong>{players[currentIndex]}</strong></h2>
-          <p className="muted">Hand the phone to this player. Tap “Show word”. After reading, “Hide & pass”.</p>
+          <p className="muted">Hand the phone to this player. Tap “Show word”. After reading — “Hide & pass”.</p>
 
           <div className="revealCard">
             {!isCardShown ? (
               <Button label="Show word" onClick={() => setIsCardShown(true)} />
             ) : (
               <>
-                <div className="bigText">{currentIndex === imposterIndex ? 'YOU ARE THE IMPOSTER' : secretWord}</div>
+                <div className="bigText">
+                  {currentIndex === imposterIndex ? 'YOU ARE THE IMPOSTER' : secretWord}
+                </div>
                 <p className="muted">Press “Hide & pass” when ready.</p>
               </>
             )}
@@ -169,7 +202,11 @@ export default function App() {
           <h2>Hint round starts</h2>
           <p className="muted">Each player says a hint related to the secret word…</p>
           <div style={{ height: 16 }} />
-          <Button label="Reveal (who’s the imposter)" onClick={() => setStage('results')} variant="secondary" />
+          <Button
+            label="Reveal (who’s the imposter)"
+            onClick={() => setStage('results')}
+            variant="secondary"
+          />
           <div style={{ height: 8 }} />
           <Button label="Reset" onClick={resetToSetup} variant="ghost" />
         </div>
