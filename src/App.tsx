@@ -104,8 +104,7 @@ export default function App() {
   return (
     <div className="page">
       <header>
-        <h1>IMPOSTER</h1>
-        <p className="muted">Pass-and-play party game (one device)</p>
+        <h1 className="center">IMPOSTER GUESS WHO'S LIER</h1>
       </header>
 
       {stage === 'setup' && (
