@@ -4,7 +4,7 @@ import App from './App'
 import './index.css'
 
 // --- GA4 init (programmatic, no inline scripts) ---
-const GA_ID = 'G-XWD4KFJ166' // твій Measurement ID
+const GA_ID = 'G-NLN3R5Y31K' // твій Measurement ID
 
 function initGA(id: string) {
   if (!id) return
